@@ -19,3 +19,10 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  * The cleaner shorthand for printing output.
  */
 fun Any?.println() = println(this)
+
+tailrec fun Long.gcd(other: Long): Long = if (other == 0L) this else other.gcd(this % other)
+
+fun Long.lcm(other: Long): Long = (this * other) / gcd(other)
+fun Int.lcm(other: Int): Long = this.toLong().lcm(other.toLong())
+
+fun List<Int>.lcm(): Long = map(Int::toLong).reduce { acc, n -> acc.lcm(n) }
